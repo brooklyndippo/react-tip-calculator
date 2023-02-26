@@ -1,23 +1,34 @@
-import logo from './logo.svg';
+import {useState} from 'react';
 import './App.css';
+import Bill from './components/Bill';
+import Split from './components/Split';
+import TipPercent from './components/TipPercent';
+import Tip from './components/Tip';
 
 function App() {
+
+  const defaultValues = {
+    bill: 20,
+    tipPercent: 0.15,
+    split: false,
+    splitNum: 2
+  };
+  const [calc, setCalc] = useState(defaultValues);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+          <Bill 
+            updateBill = {newBill  => setCalc(calc => ({...calc, bill: newBill}))}
+          />
+          <TipPercent 
+            updateTip = {newTip  => setCalc(calc => ({...calc, tipPercent: newTip}))}
+          />
+          <Split 
+            split = {calc.split}
+            setSplit = {splitBill => setCalc(calc => ({...calc, split: splitBill}))}
+            setSplitNum = {splitNum => setCalc(calc => ({...calc, splitNum: splitNum}))}
+          />
+          <Tip calc={calc} />
     </div>
   );
 }
