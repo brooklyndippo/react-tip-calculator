@@ -25,6 +25,7 @@ function App() {
           />
           <Split 
             split = {calc.split}
+            splitNum = {calc.splitNum}
             setSplit = {splitBill => setCalc(calc => ({...calc, split: splitBill}))}
             setSplitNum = {splitNum => setCalc(calc => ({...calc, splitNum: splitNum}))}
           />

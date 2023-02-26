@@ -1,3 +1,5 @@
+import './InputStyling.css'
+
 export default function Tip({calc: {bill, tipPercent, split, splitNum}}) {
 
     let tip = bill * tipPercent;
@@ -8,7 +10,7 @@ export default function Tip({calc: {bill, tipPercent, split, splitNum}}) {
 
     return (
       <div>
-        <p>Tip: ${tip.toFixed(2)}</p>
+        <p className="printTip">Tip: ${tip.toFixed(2)}</p>
       </div>
     )
 }

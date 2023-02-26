@@ -1,23 +1,20 @@
 import './TipPercent.css'
+import { useState } from 'react';
 
 export default function TipPercent(props) {
-    
-    // function handleChange(e) {
-    //     setCalc(calc => ({
-    //         ...calc,
-    //         tipPercent: e.target.value
-    //       }))
-    // }
-    
-    // function handleCustomTip(e) {
-    //     setCalc(calc => ({
-    //         ...calc,
-    //         tipPercent: (e.target.value/100)
-    //       }))
-    // }
 
-    const customTip = document.getElementById('custom-tip');
+    const [showCustomTip, setShowCustomTip] = useState(false);
 
+    const customTipInput = showCustomTip ? (
+        <input
+        type="number"
+        name="custom-tip"
+        id="custom-tip"
+        defaultValue={20}
+        onChange={(e) => props.updateTip(e.target.value/100)}
+        />
+    ) : null;
+    
     return (
         <form>
         <fieldset>
@@ -30,7 +27,7 @@ export default function TipPercent(props) {
             name="tip-percent"
             id="tip-percent-15"
             value="0.15"
-            onChange={() => props.updateTip(.15)}
+            onChange={() => {props.updateTip(.15); setShowCustomTip(false);}}
             defaultChecked
             />
             <label htmlFor="tip-percent-15" className="default-tip" >
@@ -41,7 +38,7 @@ export default function TipPercent(props) {
             name="tip-percent"
             id="tip-percent-20"
             value="0.20"
-            onChange={() => props.updateTip(.20)}
+            onChange={() => {props.updateTip(.20); setShowCustomTip(false);}}
             />
             <label htmlFor="tip-percent-20" className="default-tip">
             {`20% \n Great`}</label>
@@ -51,7 +48,7 @@ export default function TipPercent(props) {
             name="tip-percent"
             id="tip-percent-25"
             value="0.25"
-            onChange={() => props.updateTip(.25)}
+            onChange={() => {props.updateTip(.25); setShowCustomTip(false);}}
             />
             <label htmlFor="tip-percent-25" className="default-tip">
             {`25% \n Amazing`}</label>
@@ -61,17 +58,13 @@ export default function TipPercent(props) {
             type="radio"
             name="tip-percent"
             id="tip-percent-custom"
-            onChange={() => props.updateTip(customTip.value/100)}
+            onChange={() => {props.updateTip(.20); setShowCustomTip(true);}}
             />
             <label htmlFor="tip-percent-custom" className="default-tip">
             Custom Tip %</label>
-            <input
-            type="number"
-            name="custom-tip"
-            id="custom-tip"
-            defaultValue={20}
-            onChange={(e) => props.updateTip(e.target.value/100)}
-            />
+            
+            {customTipInput}
+
         </fieldset>
         </form>
     );
